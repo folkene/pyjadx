@@ -12,15 +12,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#ifndef JADX_H_
-#define JADX_H_
+#include <jadx/args/ArgType.hpp>
 
-#include <jadx/api/JadxArgs.hpp>
-#include <jadx/api/JavaClass.hpp>
-#include <jadx/api/JadxDecompiler.hpp>
-#include <jadx/api/JavaPackage.hpp>
+namespace jni::jadx::args {
 
+ArgType::ArgType(JNIEnv& env, const Object_t& obj) {
+  this->env_ = &env;
+  this->obj_ = NewLocal(env, obj);
+}
 
-#include <jadx/info/AccessInfo.hpp>
+ArgType::ArgType(JNIEnv& env, const Object<>& obj) {
 
-#endif
+  this->env_ = &env;
+  auto&& casted = Cast<ArgTypeTag>(this->env(), this->clazz(), obj);
+  this->obj_ = NewLocal(env, casted);
+}
+
+std::string ArgType::to_string(void) const {
+  static auto&& toString = this->clazz().template GetMethod<String()>(this->env(), "toString");
+  return Make<std::string>(this->env(), this->obj_.Call(this->env(), toString));
+}
+
+}

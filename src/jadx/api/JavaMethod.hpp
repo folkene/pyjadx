@@ -19,9 +19,15 @@
 
 #include <jadx/api/JavaNode.hpp>
 //#include <jadx/api/JavaClass.hpp>
+#include <jadx/info/AccessInfo.hpp>
+#include <jadx/args/ArgType.hpp>
+#include <java/util/List.hpp>
 
 #include <string>
 
+using namespace jni::jadx::info;
+using namespace jni::jadx::args;
+using namespace jni::java::util;
 
 namespace jni::jadx::api {
 
@@ -46,6 +52,10 @@ class JavaMethod : public JavaNode<JavaMethod, JavaMethodTag, Object<JavaMethodT
   bool operator!=(const JavaMethod& other) const;
 
   friend std::ostream& operator<<(std::ostream& os, const JavaMethod& meth);
+
+  CREATE_GETTER_OBJECT(AccessInfo, getAccessFlags);
+  CREATE_GETTER_OBJECT(ArgType, getReturnType);
+  CREATE_GETTER_LIST(ArgType, getArguments);
 
 };
 
