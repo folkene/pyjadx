@@ -44,14 +44,6 @@ std::string JavaMethod::to_string(void) const {
   return Make<std::string>(this->env(), this->obj_.Call(this->env(), toString));
 }
 
-
-//JavaClass JavaMethod::declaring_class(void) {
-//  return const_cast<JavaClass>(static_cast<const JavaMethod*>(this)->declaring_class());
-//}
-//
-//const JavaClass JavaMethod::declaring_class(void) const {
-//}
-
 size_t JavaMethod::hash_code(void) const {
   static auto&& hashCode = this->clazz().template GetMethod<jint()>(this->env(), "hashCode");
   return this->obj_.Call(this->env(), hashCode);
@@ -69,6 +61,5 @@ std::ostream& operator<<(std::ostream& os, const JavaMethod& meth) {
   os << meth.to_string();
   return os;
 }
-
 
 }
