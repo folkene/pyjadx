@@ -20,7 +20,4 @@
 #include <jadx/api/JadxDecompiler.hpp>
 #include <jadx/api/JavaPackage.hpp>
 
-
-#include <jadx/info/AccessInfo.hpp>
-
 #endif
