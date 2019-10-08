@@ -23,12 +23,10 @@
 
 #include "utils.hpp" /* Method generator */
 
-using namespace jni::jadx::api;
-
 namespace jni::jadx::info {
 
 struct AccessInfoTag { static constexpr auto Name() { return "jadx/core/dex/info/AccessInfo"; } };
-class AccessInfo : public JavaNode<AccessInfo, AccessInfoTag, Object<AccessInfoTag>, Class<AccessInfoTag>> {
+class AccessInfo : public jni::jadx::api::JavaNode<AccessInfo, AccessInfoTag, Object<AccessInfoTag>, Class<AccessInfoTag>> {
   public:
 
   using Object_t = Object<AccessInfoTag>;
